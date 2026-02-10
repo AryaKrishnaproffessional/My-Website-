@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arya Krishna | Data Science & Tennis Enthusiast</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Tennis court net line decoration -->
+  <div class="court-net" aria-hidden="true"></div>
+
+  <!-- Floating tennis balls (decorative) -->
+  <div class="tennis-balls-container" aria-hidden="true">
+    <div class="tennis-ball ball-1"></div>
+    <div class="tennis-ball ball-2"></div>
+    <div class="tennis-ball ball-3"></div>
+    <div class="tennis-ball ball-4"></div>
+    <div class="tennis-ball ball-5"></div>
+  </div>
+
+  <nav class="nav">
+    <a href="#hero" class="nav-logo">Arya Krishna</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="nav-toggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <main>
+    <section id="hero" class="hero">
+      <div class="hero-content">
+        <p class="hero-tag animate-in">Data Science · Research · Tennis</p>
+        <h1 class="hero-title animate-in">
+          Hi, I'm <span class="highlight">Arya Krishna</span>
+        </h1>
+        <p class="hero-subtitle animate-in">
+          Building with data, playing on the court.
+        </p>
+        <div class="hero-cta animate-in">
+          <a href="#projects" class="btn btn-primary">View Projects</a>
+          <a href="https://github.com/AryaKrishnaproffessional" target="_blank" rel="noopener" class="btn btn-secondary">GitHub</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <img class="court-visual" src="assets/tennis-court.png" alt="" aria-hidden="true" />
+      </div>
+    </section>
+
+    <section id="about" class="about section">
+      <div class="section-header">
+        <span class="section-label">About Me</span>
+        <h2 class="section-title">Off the court and into the data</h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-card about-main">
+          <p>
+            I'm studying <strong>Bachelor of Data Science Advanced (Honors)</strong> at
+            <strong>Monash University</strong>, with a huge passion for contributing to
+            <strong>research</strong> and <strong>developing businesses</strong> through data.
+          </p>
+          <p>
+            When I'm not analysing datasets or building models, you'll find me on the
+            tennis court, at the gym, or thinking a few moves ahead in a game of chess.
+          </p>
+        </div>
+        <div class="about-interests">
+          <div class="interest-card" data-interest="tennis">
+            <span class="interest-icon">🎾</span>
+            <span>Tennis</span>
+          </div>
+          <div class="interest-card" data-interest="gym">
+            <span class="interest-icon">💪</span>
+            <span>Gym</span>
+          </div>
+          <div class="interest-card" data-interest="chess">
+            <span class="interest-icon">♟️</span>
+            <span>Chess</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="projects section">
+      <div class="section-header">
+        <span class="section-label">Projects</span>
+        <h2 class="section-title">What I've been building</h2>
+        <p class="section-desc">From deep learning to analytics — all on <a href="https://github.com/AryaKrishnaproffessional" target="_blank" rel="noopener">GitHub</a>.</p>
+      </div>
+      <div class="projects-grid" id="projects-grid">
+        <!-- Populated by JS from GitHub API or fallback -->
+      </div>
+      <div class="projects-cta">
+        <a href="https://github.com/AryaKrishnaproffessional?tab=repositories" target="_blank" rel="noopener" class="btn btn-primary">See all repos on GitHub</a>
+      </div>
+    </section>
+
+    <section id="contact" class="contact section">
+      <div class="section-header">
+        <span class="section-label">Get in touch</span>
+        <h2 class="section-title">Let's connect</h2>
+      </div>
+      <div class="contact-links">
+        <a href="https://github.com/AryaKrishnaproffessional" target="_blank" rel="noopener" class="contact-link">
+          <span class="contact-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false">
+              <path fill="currentColor" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.51 2.87 8.33 6.84 9.68.5.1.68-.22.68-.49 0-.24-.01-.87-.01-1.7-2.78.62-3.37-1.37-3.37-1.37-.45-1.17-1.11-1.48-1.11-1.48-.9-.63.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.89 1.55 2.34 1.1 2.91.84.09-.66.35-1.1.63-1.35-2.22-.26-4.55-1.14-4.55-5.09 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05A9.18 9.18 0 0 1 12 7.07c.85 0 1.71.12 2.51.36 1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.96-2.34 4.83-4.57 5.08.36.32.68.94.68 1.9 0 1.37-.01 2.48-.01 2.82 0 .27.18.6.69.49A10.03 10.03 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z"/>
+            </svg>
+          </span>
+          <span>
+            GitHub&nbsp;&nbsp;AryaKrishnaproffessional
+          </span>
+        </a>
+        <a href="https://www.linkedin.com/in/arya-krishna-085937321/?originalSubdomain=au" target="_blank" rel="noopener" class="contact-link contact-link--linkedin">
+          <span class="contact-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false">
+              <path fill="currentColor" d="M4.98 3.5C4.98 4.88 3.9 6 2.5 6S0 4.88 0 3.5 1.08 1 2.5 1s2.48 1.12 2.48 2.5ZM.29 8.24h4.42V23H.29V8.24ZM8.64 8.24h4.24v2.01h.06c.59-1.12 2.02-2.3 4.16-2.3 4.45 0 5.27 2.93 5.27 6.74V23h-4.43v-7.25c0-1.73-.03-3.96-2.41-3.96-2.41 0-2.78 1.88-2.78 3.83V23H8.64V8.24Z"/>
+            </svg>
+          </span>
+          <span>
+            LinkedIn&nbsp;&nbsp;Arya Krishna
+          </span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© <span id="year"></span> Arya Krishna. Built with a love for data & tennis.</p>
+  </footer>
+
+  <!-- Theme toggle (tennis day / night match) -->
+  <button class="theme-toggle" aria-label="Toggle light/dark theme">🌙</button>
+
+  <script src="script.js"></script>
+</body>
+</html>
