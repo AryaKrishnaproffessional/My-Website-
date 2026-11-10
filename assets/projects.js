@@ -4,7 +4,7 @@
  *
  * genre:  "software" (Classical) | "data" (Pop) | "ai" (EDM)
  * status: "done"      shown on its genre page
- *         "progress"  public and still being worked on (also shown under Now playing)
+ *         "progress"  public and still being worked on (also shown under Current projects)
  *         "private"   private repo: no GitHub link, shown as "Soon to roll!"
  *         "empty"     public repo with no commits yet, shown as "Soon to roll!"
  * created: "YYYY-MM" (used for ordering and the timeline)

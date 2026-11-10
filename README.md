@@ -2,10 +2,10 @@
 
 Arya Krishna's portfolio: GitHub projects sorted like a record collection.
 
-- **Classical**: software engineering (jukebox)
-- **Pop**: data science and machine learning (microphone)
-- **EDM**: AI (robot DJ)
-- **Now playing**: current work. Private projects show as "Soon to roll!"
+- **Software projects** (classical) (jukebox)
+- **Data science projects** (pop) (microphone)
+- **AI projects** (EDM) (robot DJ)
+- **Current projects**: current work. Private projects show as "Soon to roll!"
 
 Live site: https://aryakrishnaproffessional.github.io/My-Website-/
 

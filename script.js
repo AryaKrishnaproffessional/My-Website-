@@ -13,19 +13,19 @@
 
   const GENRES = {
     software: {
-      route: 'software', name: 'Classical', label: 'Software', mascot: 'jukebox', color: '#B07415',
-      intro: 'Software engineering projects. Well-structured programs where every part has a job, like a classical score.',
-      card: 'software projects in Python, Java, SQL and JavaScript.'
+      route: 'software', name: 'Software projects', label: 'Software', mascot: 'jukebox', color: '#B07415',
+      intro: 'Well-structured programs where every part has a job, like a classical score.',
+      card: 'projects in Python, Java, SQL and JavaScript.'
     },
     data: {
-      route: 'data-science', name: 'Pop', label: 'Data science', mascot: 'mic', color: '#C2456B',
+      route: 'data-science', name: 'Data science projects', label: 'Data science', mascot: 'mic', color: '#C2456B',
       intro: 'Data science and machine learning: forecasting, computer vision and deep learning, newest first.',
-      card: 'data science and machine learning projects.'
+      card: 'projects in forecasting, computer vision and deep learning.'
     },
     ai: {
-      route: 'ai', name: 'EDM', label: 'AI', mascot: 'robot', color: '#23808C',
-      intro: 'AI projects: chatbots, language models and bots that make decisions.',
-      card: 'AI projects: a chatbot, an LLM challenge and a trading bot.'
+      route: 'ai', name: 'AI projects', label: 'AI', mascot: 'robot', color: '#23808C',
+      intro: 'Chatbots, language models and bots that make decisions, like an EDM set run by machines.',
+      card: 'projects: a chatbot, an LLM challenge and a trading bot.'
     }
   };
   const SOON_COLOR = '#C0392B';
@@ -76,7 +76,7 @@
         '<div class="art">' + mascot(g.mascot) + '</div>' +
         '<h2>' + g.name + '</h2>' +
         '<p>' + count(key) + ' ' + g.card + '</p>' +
-        '<span class="open">Open ' + g.label.toLowerCase() + '</span>' +
+        '<span class="open">See all ' + count(key) + '</span>' +
         '</a>';
     }).join('');
 
@@ -89,7 +89,7 @@
       '<section class="soon-band">' +
         '<div><span class="stamp">Soon to roll!</span>' +
         '<p>' + playing + ' projects are in progress right now. ' + soon + ' of them stay under wraps until they’re ready.</p></div>' +
-        '<a class="button" href="#now-playing">See what’s playing</a>' +
+        '<a class="button" href="#now-playing">See current projects</a>' +
       '</section>';
   }
 
@@ -128,7 +128,7 @@
     }).join('');
 
     return '<section class="intro"><div class="intro-text">' +
-        '<h1>Now playing</h1>' +
+        '<h1>Current projects</h1>' +
         '<p>What I’m working on right now. ' + live.length + ' projects are public. The rest are private or just getting started.</p>' +
       '</div></section>' +
       '<section class="section"><h2>In progress</h2><div class="grid">' + liveCards + '</div></section>' +
@@ -156,7 +156,7 @@
     }).join('');
 
     const first = sorted[0];
-    const legend = Object.keys(GENRES).map((k) => '<li><span style="background:' + GENRES[k].color + '"></span>' + GENRES[k].name + ': ' + GENRES[k].label.toLowerCase() + '</li>').join('') +
+    const legend = Object.keys(GENRES).map((k) => '<li><span style="background:' + GENRES[k].color + '"></span>' + GENRES[k].name + '</li>').join('') +
       '<li><span style="background:' + SOON_COLOR + '"></span>Coming soon</li>';
 
     aside.innerHTML = '<h2 id="timeline-title">Project journey</h2>' +
@@ -211,7 +211,7 @@
   });
 
   /* Router */
-  const TITLES = { home: 'The Setlist', software: 'Software', 'data-science': 'Data science', ai: 'AI', 'now-playing': 'Now playing' };
+  const TITLES = { home: 'The Setlist', software: 'Software projects', 'data-science': 'Data science projects', ai: 'AI projects', 'now-playing': 'Current projects' };
 
   function route(focus) {
     let name = location.hash.replace('#', '') || 'home';
