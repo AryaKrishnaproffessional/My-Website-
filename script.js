@@ -7,6 +7,7 @@
   'use strict';
 
   const GH = 'https://github.com/AryaKrishnaproffessional/';
+  const LINKEDIN = 'https://www.linkedin.com/in/arya-krishna-085937321/';
   const PROJECTS = window.PROJECTS || [];
   const MASCOTS = window.MASCOTS || {};
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -59,9 +60,13 @@
   }
 
   function projectCard(p) {
-    const link = p.status === 'private'
-      ? '<span class="private-note">Private repo for now</span>'
-      : '<a class="card-link" href="' + GH + esc(p.repo) + '" target="_blank" rel="noopener">View ' + esc(p.title) + ' on GitHub</a>';
+    let link = '<a class="card-link" href="' + GH + esc(p.repo) + '" target="_blank" rel="noopener">View ' + esc(p.title) + ' on GitHub</a>';
+    if (p.status === 'private' && p.contact) {
+      link = '<p class="private-note">This project is private. If you want to know more about it, ' +
+        '<a href="' + LINKEDIN + '" target="_blank" rel="noopener">contact me on LinkedIn</a>.</p>';
+    } else if (p.status === 'private') {
+      link = '<span class="private-note">Private repo for now</span>';
+    }
     return '<article class="card">' +
       (isSoon(p) ? '<span class="stamp">Soon to roll!</span>' : '') +
       '<h2>' + esc(p.title) + '</h2>' +

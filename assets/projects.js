@@ -7,6 +7,7 @@
  *         "progress"  public and still being worked on
  *         "private"   private repo: no GitHub link
  *         "empty"     public repo with no commits yet
+ * contact: true       private project whose card invites visitors to get in touch to learn more
  * current: true       shown on the Current projects page. Private or empty current
  *                     projects get the "Soon to roll!" stamp.
  * created: "YYYY-MM" (used for ordering and the timeline)
@@ -40,7 +41,7 @@ window.PROJECTS = [
     meta: 'Bots', desc: 'A bot for trading and betting decisions.' },
   { title: 'Game Theory Bot', repo: 'Game-Theory-Bot', genre: 'data', status: 'done', created: '2026-06',
     meta: 'Game theory', desc: 'Uses game theory to find the best plays in strategy games like poker.' },
-  { title: 'MCFS Geofinance', repo: 'MCFS_geofinance_project', genre: 'data', status: 'private', created: '2026-07',
+  { title: 'MCFS Geofinance', repo: 'MCFS_geofinance_project', genre: 'data', status: 'private', contact: true, created: '2026-07',
     meta: 'Jupyter', desc: 'Geo-finance analysis in Jupyter notebooks.' },
   { title: 'Tuition Project', repo: 'Tuition_project', genre: 'software', status: 'private', created: '2026-11',
     meta: 'Tutoring', desc: 'A tutoring project.' },
