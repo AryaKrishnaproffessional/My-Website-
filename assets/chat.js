@@ -320,7 +320,6 @@
     blocksEl.querySelectorAll('.bot-block').forEach((b) => { b.disabled = true; });
 
     addMessage('user', q);
-    history.push({ role: 'user', content: q });
     fireAtInvader();
     const typing = showTyping();
 
@@ -340,7 +339,8 @@
 
     typing.remove();
     addMessage('bot', data.answer, { sources: data.sources, typewriter: true, error: failed });
-    if (!failed) history.push({ role: 'assistant', content: data.answer });
+    // history holds earlier turns only; the current question travels separately as `message`.
+    if (!failed) history.push({ role: 'user', content: q }, { role: 'assistant', content: data.answer });
 
     busy = false;
     fireBtn.disabled = false;

@@ -50,8 +50,12 @@
   <script src="assets/mascots.js"></script>
   <script src="script.js"></script>
   <script>
-    // Set endpoint to your Python backend's /chat URL to switch Arya-bot out of demo mode.
-    window.ARYA_BOT_CONFIG = { endpoint: null };
+    // Local copies of the site talk to the Python backend on port 8001 (see BACKEND.md).
+    // The live site stays in demo mode until null is replaced with the hosted /chat URL.
+    window.ARYA_BOT_CONFIG = {
+      endpoint: ['localhost', '127.0.0.1'].includes(location.hostname) ? 'http://localhost:8001/chat' : null,
+      timeoutMs: 60000
+    };
   </script>
   <script src="assets/chat.js"></script>
 </body>
