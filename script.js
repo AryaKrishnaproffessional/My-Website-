@@ -38,7 +38,13 @@
 
   /* Helpers */
   const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-  const isSoon = (p) => p.status === 'private' || p.status === 'empty';
+  const isCurrent = (p) => p.current === true;
+  // Current projects with no public code yet get the "Soon to roll!" stamp.
+  const isSoon = (p) => isCurrent(p) && (p.status === 'private' || p.status === 'empty');
+  const listNames = (arr) => {
+    const names = arr.map((p) => esc(p.title));
+    return names.length < 2 ? names.join('') : names.slice(0, -1).join(', ') + ' and ' + names[names.length - 1];
+  };
   const monthName = (ym) => fmtMonth.format(toDate(ym));
   const monthYear = (ym) => fmtMonthYear.format(toDate(ym));
   const newestFirst = (a, b) => b.created.localeCompare(a.created);
@@ -68,8 +74,10 @@
   /* Pages */
   function renderHome() {
     const count = (g) => PROJECTS.filter((p) => p.genre === g).length;
-    const soon = PROJECTS.filter(isSoon).length;
-    const playing = PROJECTS.filter((p) => p.status === 'progress').length + soon;
+    const current = PROJECTS.filter(isCurrent);
+    const hidden = current.filter(isSoon);
+    const playing = 'Right now I’m working on ' + listNames(current) + '.' +
+      (hidden.length ? ' ' + listNames(hidden) + (hidden.length === 1 ? ' stays under wraps until it’s ready.' : ' stay under wraps until they’re ready.') : '');
     const genreCards = Object.keys(GENRES).map((key) => {
       const g = GENRES[key];
       return '<a class="genre-card" data-genre="' + key + '" href="#' + g.route + '">' +
@@ -88,7 +96,7 @@
       '<section class="genres" aria-label="Genres">' + genreCards + '</section>' +
       '<section class="soon-band">' +
         '<div><span class="stamp">Soon to roll!</span>' +
-        '<p>' + playing + ' projects are in progress right now. ' + soon + ' of them stay under wraps until they’re ready.</p></div>' +
+        '<p>' + playing + '</p></div>' +
         '<a class="button" href="#now-playing">See current projects</a>' +
       '</section>';
   }
@@ -104,8 +112,9 @@
   }
 
   function renderNowPlaying() {
-    const live = PROJECTS.filter((p) => p.status === 'progress').sort(newestFirst);
-    const soon = PROJECTS.filter(isSoon).sort(newestFirst);
+    const current = PROJECTS.filter(isCurrent).sort(newestFirst);
+    const live = current.filter((p) => !isSoon(p));
+    const soon = current.filter(isSoon);
     const liveCards = live.map((p) => {
       const g = GENRES[p.genre];
       return '<article class="card live-card">' +
@@ -129,10 +138,10 @@
 
     return '<section class="intro"><div class="intro-text">' +
         '<h1>Current projects</h1>' +
-        '<p>What I’m working on right now. ' + live.length + ' projects are public. The rest are private or just getting started.</p>' +
+        '<p>What I’m working on right now: ' + listNames(current) + '.</p>' +
       '</div></section>' +
-      '<section class="section"><h2>In progress</h2><div class="grid">' + liveCards + '</div></section>' +
-      '<section class="section"><h2>Coming soon</h2><div class="grid">' + soonCards + '</div></section>';
+      (live.length ? '<section class="section"><h2>In progress</h2><div class="grid">' + liveCards + '</div></section>' : '') +
+      (soon.length ? '<section class="section"><h2>Coming soon</h2><div class="grid">' + soonCards + '</div></section>' : '');
   }
 
   /* Timeline sidebar */

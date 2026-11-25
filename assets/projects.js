@@ -3,10 +3,12 @@
  * To add a project, add an entry here; the pages and the timeline update themselves.
  *
  * genre:  "software" (Classical) | "data" (Pop) | "ai" (EDM)
- * status: "done"      shown on its genre page
- *         "progress"  public and still being worked on (also shown under Current projects)
- *         "private"   private repo: no GitHub link, shown as "Soon to roll!"
- *         "empty"     public repo with no commits yet, shown as "Soon to roll!"
+ * status: "done"      public repo
+ *         "progress"  public and still being worked on
+ *         "private"   private repo: no GitHub link
+ *         "empty"     public repo with no commits yet
+ * current: true       shown on the Current projects page. Private or empty current
+ *                     projects get the "Soon to roll!" stamp.
  * created: "YYYY-MM" (used for ordering and the timeline)
  */
 window.PROJECTS = [
@@ -28,9 +30,9 @@ window.PROJECTS = [
     meta: 'Python', desc: 'A card game built on data structures chosen for good time and space complexity.' },
   { title: 'Job Market Analytics', repo: 'Job-Market-Analytics-and-Forecasting-Web-Platform-', genre: 'software', status: 'done', created: '2026-01',
     meta: 'JavaScript, Python and Azure', desc: 'A website showing job-market analytics, with a cloud database and a built-in chatbot.' },
-  { title: 'RNA Sequence Project', repo: 'RNA-Sequence-Project', genre: 'data', status: 'progress', created: '2026-01', pushed: 'February 2026',
+  { title: 'RNA Sequence Project', repo: 'RNA-Sequence-Project', genre: 'data', status: 'done', created: '2026-01',
     meta: 'Kaggle', desc: 'A Kaggle competition entry on RNA sequences.' },
-  { title: 'AI Chatbot', repo: 'AI_chatbot-using-cursor-', genre: 'ai', status: 'progress', created: '2026-02', pushed: 'February 2026',
+  { title: 'AI Chatbot', repo: 'AI_chatbot-using-cursor-', genre: 'ai', status: 'progress', current: true, created: '2026-02', pushed: 'February 2026',
     meta: 'Built with Cursor', desc: 'An AI chatbot built with Cursor.' },
   { title: 'My Website', repo: 'My-Website-', genre: 'software', status: 'done', created: '2026-02',
     meta: 'JavaScript', desc: 'This portfolio. You are looking at it.' },
@@ -42,6 +44,6 @@ window.PROJECTS = [
     meta: 'Jupyter', desc: 'Geo-finance analysis in Jupyter notebooks.' },
   { title: 'Tuition Project', repo: 'Tuition_project', genre: 'software', status: 'private', created: '2026-11',
     meta: 'Tutoring', desc: 'A tutoring project.' },
-  { title: 'NameTheLLM', repo: 'NameTheLLMKaggle', genre: 'ai', status: 'private', created: '2026-11',
+  { title: 'NameTheLLM', repo: 'NameTheLLMKaggle', genre: 'ai', status: 'private', current: true, created: '2026-11',
     meta: 'Kaggle and MCP', desc: 'A Kaggle project built with MCP.' }
 ];

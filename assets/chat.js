@@ -262,7 +262,7 @@
   // Demo mode: simple keyword matching over the site's own data.
   const monthYear = (ym) => new Intl.DateTimeFormat(undefined, { month: 'long', year: 'numeric', timeZone: 'UTC' })
     .format(new Date(Date.UTC(+ym.slice(0, 4), +ym.slice(5, 7) - 1, 1)));
-  const isSoon = (p) => p.status === 'private' || p.status === 'empty';
+  const isSoon = (p) => p.current === true && (p.status === 'private' || p.status === 'empty');
   const srcFor = (p) => (p.status === 'private' ? null : { title: p.title, url: GH + p.repo });
   const line = (p) => '• ' + p.title + ' (' + monthYear(p.created) + (isSoon(p) ? ', soon to roll' : '') + '): ' + p.desc;
   const ALIASES = {
@@ -295,7 +295,7 @@
       }
     }
     if (has('current', 'working on', 'right now', 'in progress', 'lately', 'latest')) {
-      return list(PROJECTS.filter((p) => p.status === 'progress' || isSoon(p)), 'Here is what Arya is working on right now:');
+      return list(PROJECTS.filter((p) => p.current === true), 'Here is what Arya is working on right now:');
     }
     if (has(' ai ', 'artificial', 'llm', 'agent', ' bot')) return list(PROJECTS.filter((p) => p.genre === 'ai'), 'Arya’s AI projects:');
     if (has('data', 'machine learning', ' ml ', 'model', 'deep learning', 'kaggle', 'vision')) return list(PROJECTS.filter((p) => p.genre === 'data'), 'Arya’s data science and machine learning projects:');
