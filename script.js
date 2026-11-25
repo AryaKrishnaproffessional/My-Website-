@@ -1,5 +1,5 @@
 /*
- * The Setlist: Arya Krishna's portfolio.
+ * Arya's Arcade: Arya Krishna's portfolio, laid out as retro arcade levels.
  * A small hash router renders each page from assets/projects.js.
  * Routes: #home, #software, #data-science, #ai, #now-playing
  */
@@ -14,22 +14,22 @@
 
   const GENRES = {
     software: {
-      route: 'software', name: 'Software projects', label: 'Software', mascot: 'jukebox', color: '#B07415',
-      intro: 'Well-structured programs where every part has a job, like a classical score.',
+      route: 'software', level: 1, name: 'Software projects', label: 'Software', scene: 'maze', color: '#FFD23F',
+      intro: 'Software engineering in Python, Java, SQL and JavaScript. Every path through the maze has a purpose.',
       card: 'projects in Python, Java, SQL and JavaScript.'
     },
     data: {
-      route: 'data-science', name: 'Data science projects', label: 'Data science', mascot: 'mic', color: '#C2456B',
+      route: 'data-science', level: 2, name: 'Data science projects', label: 'Data science', scene: 'space', color: '#4DE1FF',
       intro: 'Data science and machine learning: forecasting, computer vision and deep learning, newest first.',
       card: 'projects in forecasting, computer vision and deep learning.'
     },
     ai: {
-      route: 'ai', name: 'AI projects', label: 'AI', mascot: 'robot', color: '#23808C',
-      intro: 'Chatbots, language models and bots that make decisions, like an EDM set run by machines.',
+      route: 'ai', level: 3, name: 'AI projects', label: 'AI', scene: 'climb', color: '#FF6B4A',
+      intro: 'Chatbots, language models and bots that make decisions. The final climb.',
       card: 'projects: a chatbot, an LLM challenge and a trading bot.'
     }
   };
-  const SOON_COLOR = '#C0392B';
+  const SOON_COLOR = '#FF4FD8';
   const fmtMonth = new Intl.DateTimeFormat(undefined, { month: 'long', timeZone: 'UTC' });
   const fmtMonthYear = new Intl.DateTimeFormat(undefined, { month: 'long', year: 'numeric', timeZone: 'UTC' });
   const toDate = (ym) => new Date(Date.UTC(Number(ym.slice(0, 4)), Number(ym.slice(5, 7)) - 1, 1));
@@ -50,7 +50,7 @@
   const monthYear = (ym) => fmtMonthYear.format(toDate(ym));
   const newestFirst = (a, b) => b.created.localeCompare(a.created);
   const genreKeyForRoute = (route) => Object.keys(GENRES).find((k) => GENRES[k].route === route);
-  const mascot = (name) => '<div class="mascot">' + (MASCOTS[name] || '') + '</div>';
+  const screen = (name) => '<div class="screen">' + (MASCOTS[name] || '') + '</div>';
 
   function statusText(p) {
     if (p.status === 'progress') return 'in progress';
@@ -67,7 +67,7 @@
     } else if (p.status === 'private') {
       link = '<span class="private-note">Private repo for now</span>';
     }
-    return '<article class="card">' +
+    return '<article class="card panel">' +
       (isSoon(p) ? '<span class="stamp">Soon to roll!</span>' : '') +
       '<h2>' + esc(p.title) + '</h2>' +
       '<span class="meta">' + monthYear(p.created) + ', ' + esc(statusText(p)) + '</span>' +
@@ -83,26 +83,33 @@
     const hidden = current.filter(isSoon);
     const playing = 'Right now I’m working on ' + listNames(current) + '.' +
       (hidden.length ? ' ' + listNames(hidden) + (hidden.length === 1 ? ' stays under wraps until it’s ready.' : ' stay under wraps until they’re ready.') : '');
-    const genreCards = Object.keys(GENRES).map((key) => {
+    const levelCards = Object.keys(GENRES).map((key) => {
       const g = GENRES[key];
-      return '<a class="genre-card" data-genre="' + key + '" href="#' + g.route + '">' +
-        '<div class="art">' + mascot(g.mascot) + '</div>' +
+      return '<a class="level-card panel" data-genre="' + key + '" href="#' + g.route + '">' +
+        screen(g.scene) +
+        '<span class="level-tag">LEVEL ' + g.level + '</span>' +
         '<h2>' + g.name + '</h2>' +
         '<p>' + count(key) + ' ' + g.card + '</p>' +
-        '<span class="open">See all ' + count(key) + '</span>' +
+        '<span class="start">START LEVEL ' + g.level + '</span>' +
         '</a>';
     }).join('');
 
     return '<section class="home-intro">' +
-        '<h1>The Setlist</h1>' +
-        '<p class="lead">My GitHub projects, sorted like a record collection. Software plays classical, data science plays pop, and AI plays EDM.</p>' +
+        '<p class="press-start">PLAYER 1 PRESS START</p>' +
+        '<h1>Arya’s Arcade</h1>' +
+        '<p class="lead">My GitHub projects as an arcade: three levels of software, data science and AI, plus a bonus stage for what I’m building now.</p>' +
         '<p class="about">I study the Bachelor of Data Science Advanced (Honours) at Monash University, and I love using data for research and to help businesses grow. Away from the keyboard you’ll find me on the tennis court, at the gym, or a few moves ahead in a game of chess.</p>' +
       '</section>' +
-      '<section class="genres" aria-label="Genres">' + genreCards + '</section>' +
-      '<section class="soon-band">' +
-        '<div><span class="stamp">Soon to roll!</span>' +
+      '<section class="section" aria-labelledby="select-level">' +
+        '<h2 class="section-title" id="select-level">SELECT A LEVEL</h2>' +
+        '<div class="levels">' + levelCards + '</div>' +
+      '</section>' +
+      '<section class="bonus-band panel" aria-labelledby="bonus-title">' +
+        screen('coin') +
+        '<div><span class="level-tag" style="color: var(--bonus)">BONUS STAGE</span>' +
+        '<h2 class="section-title" id="bonus-title">Current projects</h2>' +
         '<p>' + playing + '</p></div>' +
-        '<a class="button" href="#now-playing">See current projects</a>' +
+        '<a class="button" href="#now-playing">PLAY BONUS</a>' +
       '</section>';
   }
 
@@ -110,8 +117,8 @@
     const g = GENRES[key];
     const list = PROJECTS.filter((p) => p.genre === key).sort(newestFirst);
     return '<section class="intro">' +
-        '<div class="mascot-frame">' + mascot(g.mascot) + '</div>' +
-        '<div class="intro-text"><h1>' + g.name + '</h1><p>' + g.intro + '</p></div>' +
+        screen(g.scene) +
+        '<div class="intro-text"><span class="level-tag">LEVEL ' + g.level + ' OF 3</span><h1>' + g.name + '</h1><p>' + g.intro + '</p></div>' +
       '</section>' +
       '<section class="grid" aria-label="' + g.label + ' projects">' + list.map(projectCard).join('') + '</section>';
   }
@@ -122,10 +129,10 @@
     const soon = current.filter(isSoon);
     const liveCards = live.map((p) => {
       const g = GENRES[p.genre];
-      return '<article class="card live-card">' +
-        '<div class="record" aria-hidden="true"><span style="background:' + g.color + '"></span></div>' +
+      return '<article class="card panel live-card">' +
+        '<span class="player-dot" aria-hidden="true" style="background:' + g.color + '"></span>' +
         '<div><h3>' + esc(p.title) + '</h3>' +
-        '<span class="meta">' + g.label + ', last updated ' + esc(p.pushed || monthYear(p.created)) + '</span>' +
+        '<span class="meta">Level ' + g.level + ', ' + g.label + ', last updated ' + esc(p.pushed || monthYear(p.created)) + '</span>' +
         '<a class="card-link" href="' + GH + esc(p.repo) + '" target="_blank" rel="noopener">View ' + esc(p.title) + ' on GitHub</a></div>' +
         '</article>';
     }).join('');
@@ -133,7 +140,7 @@
       const note = p.status === 'private'
         ? 'Private, started ' + monthYear(p.created)
         : 'Public, first commit pending';
-      return '<article class="card soon-card">' +
+      return '<article class="card panel soon-card">' +
         '<span class="stamp">Soon to roll!</span>' +
         '<h3>' + esc(p.title) + '</h3>' +
         '<p class="desc">' + esc(p.desc) + '</p>' +
@@ -141,12 +148,14 @@
         '</article>';
     }).join('');
 
-    return '<section class="intro"><div class="intro-text">' +
+    return '<section class="intro">' +
+        screen('coin') +
+        '<div class="intro-text"><span class="level-tag">BONUS STAGE</span>' +
         '<h1>Current projects</h1>' +
         '<p>What I’m working on right now: ' + listNames(current) + '.</p>' +
       '</div></section>' +
-      (live.length ? '<section class="section"><h2>In progress</h2><div class="grid">' + liveCards + '</div></section>' : '') +
-      (soon.length ? '<section class="section"><h2>Coming soon</h2><div class="grid">' + soonCards + '</div></section>' : '');
+      (live.length ? '<section class="section"><h2 class="section-title">IN PROGRESS</h2><div class="grid">' + liveCards + '</div></section>' : '') +
+      (soon.length ? '<section class="section"><h2 class="section-title">COMING SOON</h2><div class="grid">' + soonCards + '</div></section>' : '');
   }
 
   /* Timeline sidebar */
@@ -170,10 +179,10 @@
     }).join('');
 
     const first = sorted[0];
-    const legend = Object.keys(GENRES).map((k) => '<li><span style="background:' + GENRES[k].color + '"></span>' + GENRES[k].name + '</li>').join('') +
-      '<li><span style="background:' + SOON_COLOR + '"></span>Coming soon</li>';
+    const legend = Object.keys(GENRES).map((k) => '<li><span style="background:' + GENRES[k].color + '"></span>Level ' + GENRES[k].level + ': ' + GENRES[k].label + '</li>').join('') +
+      '<li><span style="background:' + SOON_COLOR + '"></span>Bonus: coming soon</li>';
 
-    aside.innerHTML = '<h2 id="timeline-title">Project journey</h2>' +
+    aside.innerHTML = '<h2 id="timeline-title">PLAY HISTORY</h2>' +
       '<p class="sub">' + PROJECTS.length + ' projects since ' + (first ? monthYear(first.created) : '') + '</p>' +
       yearsHtml +
       '<ul class="legend" aria-label="Colour key">' + legend + '</ul>';
@@ -188,7 +197,7 @@
   function setUpMascots() {
     const paused = isPaused();
     document.body.classList.toggle('motion-paused', paused);
-    main.querySelectorAll('.mascot svg').forEach((svg) => {
+    main.querySelectorAll('.screen svg').forEach((svg) => {
       if (!svg.pauseAnimations) return;
       if (paused) svg.pauseAnimations(); else svg.unpauseAnimations();
     });
@@ -206,26 +215,8 @@
     });
   }
 
-  // The robot DJ's eyes follow the pointer.
-  let eyeFrame = 0;
-  document.addEventListener('pointermove', (e) => {
-    if (isPaused() || eyeFrame) return;
-    eyeFrame = requestAnimationFrame(() => {
-      eyeFrame = 0;
-      main.querySelectorAll('[data-eyes]').forEach((eyes) => {
-        const box = eyes.ownerSVGElement.getBoundingClientRect();
-        if (!box.width) return;
-        const dx = (e.clientX - (box.left + box.width / 2)) / window.innerWidth;
-        const dy = (e.clientY - (box.top + box.height * 0.3)) / window.innerHeight;
-        const x = Math.max(-12, Math.min(12, dx * 40));
-        const y = Math.max(-4, Math.min(4, dy * 16));
-        eyes.setAttribute('transform', 'translate(' + x.toFixed(1) + ' ' + y.toFixed(1) + ')');
-      });
-    });
-  });
-
   /* Router */
-  const TITLES = { home: 'The Setlist', software: 'Software projects', 'data-science': 'Data science projects', ai: 'AI projects', 'now-playing': 'Current projects' };
+  const TITLES = { home: 'Arya’s Arcade', software: 'Software projects', 'data-science': 'Data science projects', ai: 'AI projects', 'now-playing': 'Current projects' };
 
   function route(focus) {
     let name = location.hash.replace('#', '') || 'home';
@@ -243,7 +234,7 @@
       delete document.body.dataset.genre;
     }
 
-    document.title = name === 'home' ? 'Arya Krishna · The Setlist' : TITLES[name] + ' · Arya Krishna';
+    document.title = name === 'home' ? 'Arya Krishna · Arya’s Arcade' : TITLES[name] + ' · Arya Krishna';
     document.querySelectorAll('.site-nav a[data-route]').forEach((a) => {
       if (a.dataset.route === name) a.setAttribute('aria-current', 'page');
       else a.removeAttribute('aria-current');

@@ -1,11 +1,11 @@
-# The Setlist
+# Arya's Arcade
 
-Arya Krishna's portfolio: GitHub projects sorted like a record collection.
+Arya Krishna's portfolio: GitHub projects laid out as retro arcade levels.
 
-- **Software projects** (classical) (jukebox)
-- **Data science projects** (pop) (microphone)
-- **AI projects** (EDM) (robot DJ)
-- **Current projects**: current work. Private projects show as "Soon to roll!"
+- **Level 1: Software projects** (maze)
+- **Level 2: Data science projects** (space shooter)
+- **Level 3: AI projects** (girder climb)
+- **Bonus stage: Current projects**. Private ones show as "Soon to roll!"
 
 Live site: https://aryakrishnaproffessional.github.io/My-Website-/
 
