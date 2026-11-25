@@ -3,3 +3,5 @@ data/
 emails.txt
 unanswered.txt
 .env
+dist/
+.netlify/

@@ -1,0 +1,11 @@
+# Netlify deploys only the files the website needs, so README.md, BACKEND.md and
+# anything else in the repo stay private.
+[build]
+  command = "rm -rf dist && mkdir dist && cp -r index.html styles.css script.js assets dist/"
+  publish = "dist"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
