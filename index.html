@@ -8,8 +8,9 @@
   <meta name="theme-color" content="#FBF5EC">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Bungee&family=Figtree:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Bungee&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Press+Start+2P&display=swap">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="assets/chat.css">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -48,5 +49,10 @@
   <script src="assets/projects.js"></script>
   <script src="assets/mascots.js"></script>
   <script src="script.js"></script>
+  <script>
+    // Set endpoint to your Python backend's /chat URL to switch Arya-bot out of demo mode.
+    window.ARYA_BOT_CONFIG = { endpoint: null };
+  </script>
+  <script src="assets/chat.js"></script>
 </body>
 </html>
