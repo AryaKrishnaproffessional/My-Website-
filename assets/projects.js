@@ -11,6 +11,7 @@
  * current: true       shown on the Current projects page. Private or empty current
  *                     projects get the "Soon to roll!" stamp.
  * created: "YYYY-MM" (used for ordering and the timeline)
+ * ended:   "YYYY-MM" optional; shown on the card as "April 2026 to June 2026"
  */
 window.PROJECTS = [
   { title: 'Deep Learning Projects', repo: 'Projects-DeepLearning', genre: 'data', status: 'done', created: '2025-05',
@@ -33,11 +34,11 @@ window.PROJECTS = [
     meta: 'JavaScript, Python and Azure', desc: 'A website showing job-market analytics, with a cloud database and a built-in chatbot.' },
   { title: 'RNA Sequence Project', repo: 'RNA-Sequence-Project', genre: 'data', status: 'done', created: '2026-01',
     meta: 'Kaggle', desc: 'A Kaggle competition entry on RNA sequences.' },
-  { title: 'AI Chatbot', repo: 'AI_chatbot-using-cursor-', genre: 'ai', status: 'progress', current: true, created: '2026-02', pushed: 'February 2026',
+  { title: 'AI Chatbot', repo: 'AI_chatbot-using-cursor-', genre: 'ai', status: 'done', created: '2026-02', ended: '2026-04',
     meta: 'Built with Cursor', desc: 'An AI chatbot built with Cursor.' },
   { title: 'My Website', repo: 'My-Website-', genre: 'software', status: 'done', created: '2026-02',
     meta: 'JavaScript', desc: 'This portfolio. You are looking at it.' },
-  { title: 'Trading Betting Bot', repo: 'Tradingbettingbot', genre: 'ai', status: 'empty', created: '2026-04',
+  { title: 'Trading Betting Bot', repo: 'Tradingbettingbot', genre: 'ai', status: 'done', created: '2026-04', ended: '2026-06',
     meta: 'Bots', desc: 'A bot for trading and betting decisions.' },
   { title: 'Game Theory Bot', repo: 'Game-Theory-Bot', genre: 'data', status: 'done', created: '2026-06',
     meta: 'Game theory', desc: 'Uses game theory to find the best plays in strategy games like poker.' },
@@ -46,5 +47,7 @@ window.PROJECTS = [
   { title: 'Tuition Project', repo: 'Tuition_project', genre: 'software', status: 'private', created: '2026-11',
     meta: 'Tutoring', desc: 'A tutoring project.' },
   { title: 'NameTheLLM', repo: 'NameTheLLMKaggle', genre: 'ai', status: 'private', current: true, created: '2026-11',
-    meta: 'Kaggle and MCP', desc: 'A Kaggle project built with MCP.' }
+    meta: 'Kaggle and MCP', desc: 'A Kaggle project built with MCP.' },
+  { title: 'Local AI Chatbot', repo: 'local-ai-chatbot', genre: 'ai', status: 'private', current: true, created: '2026-11',
+    meta: 'Local models and RAG', desc: 'A chatbot that runs AI models locally, with retrieval (RAG), request routing, load balancing and a guard that keeps conversations on topic.' }
 ];

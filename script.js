@@ -26,7 +26,7 @@
     ai: {
       route: 'ai', level: 3, name: 'AI projects', label: 'AI', scene: 'climb', color: '#FF6B4A',
       intro: 'Chatbots, language models and bots that make decisions. The final climb.',
-      card: 'projects: a chatbot, an LLM challenge and a trading bot.'
+      card: 'projects: two chatbots, an LLM challenge and a trading bot.'
     }
   };
   const SOON_COLOR = '#FF4FD8';
@@ -70,7 +70,7 @@
     return '<article class="card panel">' +
       (isSoon(p) ? '<span class="stamp">Soon to roll!</span>' : '') +
       '<h2>' + esc(p.title) + '</h2>' +
-      '<span class="meta">' + monthYear(p.created) + ', ' + esc(statusText(p)) + '</span>' +
+      '<span class="meta">' + monthYear(p.created) + (p.ended ? ' to ' + monthYear(p.ended) : '') + ', ' + esc(statusText(p)) + '</span>' +
       '<p class="desc">' + esc(p.desc) + '</p>' +
       link +
       '</article>';
@@ -82,7 +82,8 @@
     const current = PROJECTS.filter(isCurrent);
     const hidden = current.filter(isSoon);
     const playing = 'Right now I’m working on ' + listNames(current) + '.' +
-      (hidden.length ? ' ' + listNames(hidden) + (hidden.length === 1 ? ' stays under wraps until it’s ready.' : ' stay under wraps until they’re ready.') : '');
+      (hidden.length === current.length ? (current.length === 1 ? ' It stays under wraps until it’s ready.' : ' Both stay under wraps until they’re ready.')
+        : hidden.length ? ' ' + listNames(hidden) + (hidden.length === 1 ? ' stays under wraps until it’s ready.' : ' stay under wraps until they’re ready.') : '');
     const levelCards = Object.keys(GENRES).map((key) => {
       const g = GENRES[key];
       return '<a class="level-card panel" data-genre="' + key + '" href="#' + g.route + '">' +
