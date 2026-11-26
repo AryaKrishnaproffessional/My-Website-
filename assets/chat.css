@@ -23,7 +23,7 @@
 .bot-launcher {
   position: fixed;
   right: calc(20px + env(safe-area-inset-right, 0px));
-  bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+  bottom: calc(84px + env(safe-area-inset-bottom, 0px)); /* clear of the host's corner badge */
   z-index: 40;
   display: flex;
   align-items: center;
@@ -53,10 +53,10 @@
 .bot-panel {
   position: fixed;
   right: calc(20px + env(safe-area-inset-right, 0px));
-  bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+  bottom: calc(84px + env(safe-area-inset-bottom, 0px));
   z-index: 50;
   width: min(420px, calc(100vw - 40px));
-  height: min(680px, calc(100vh - 40px));
+  height: min(640px, calc(100vh - 104px));
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -103,6 +103,7 @@
 }
 .bot-hud h2 { margin: 0; font-family: var(--bot-pixel); font-size: 12px; color: var(--bot-amber); }
 .bot-hud .bot-score { color: var(--bot-dim); white-space: nowrap; }
+.bot-status { color: var(--bot-red); white-space: nowrap; }
 .bot-hud .bot-score b { color: var(--bot-text); font-weight: 400; font-variant-numeric: tabular-nums; }
 .bot-close {
   flex: none;

@@ -77,6 +77,7 @@
   panel.innerHTML =
     '<header class="bot-hud">' +
       '<h2 id="bot-title">ARYA-BOT</h2>' +
+      '<span class="bot-status" data-status hidden>BOT OFFLINE</span>' +
       '<span class="bot-score">SCORE <b data-score>0000</b></span>' +
       '<button type="button" class="bot-close" aria-label="Close chat">X</button>' +
     '</header>' +
@@ -105,6 +106,22 @@
   const input = panel.querySelector('.bot-input');
   const fireBtn = panel.querySelector('.bot-fire');
   const scoreEl = panel.querySelector('[data-score]');
+  const statusEl = panel.querySelector('[data-status]');
+  const OFFLINE_TEXT = 'Bot offline. Arya-bot’s server isn’t running right now, so please try again later.';
+
+  function setOffline(offline) {
+    statusEl.hidden = !offline;
+  }
+
+  // Ask the backend's /health route whether it's up. "no-cors" means any reply counts as online.
+  function checkOnline() {
+    const healthUrl = CONFIG.endpoint.replace(/\/chat\/?$/, '/health');
+    const ctrl = new AbortController();
+    setTimeout(() => ctrl.abort(), 5000);
+    return fetch(healthUrl, { mode: 'no-cors', signal: ctrl.signal })
+      .then(() => true)
+      .catch(() => false);
+  }
 
   /* ---------- State ---------- */
   let score = 0;
@@ -334,8 +351,9 @@
       }
     } catch (err) {
       failed = true;
-      data = { answer: 'Signal lost. Arya-bot couldn’t reach the server, so try again in a moment.' };
+      data = { answer: OFFLINE_TEXT };
     }
+    if (CONFIG.endpoint) setOffline(failed);
 
     typing.remove();
     addMessage('bot', data.answer, { sources: data.sources, typewriter: true, error: failed });
@@ -362,6 +380,13 @@
         note.textContent = 'Demo mode: answers come from this site’s project list until the full AI goes live.';
         log.append(note);
       }
+    }
+    if (CONFIG.endpoint) {
+      checkOnline().then((online) => {
+        const wasOffline = !statusEl.hidden;
+        setOffline(!online);
+        if (!online && !wasOffline) addMessage('bot', OFFLINE_TEXT, { error: true });
+      });
     }
     input.focus();
   }
